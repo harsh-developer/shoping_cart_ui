@@ -7,12 +7,12 @@ import { NgPipesModule } from 'ngx-pipes';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { LayoutsModule} from "./layouts/layouts.module";
+import { LayoutsModule } from "./layouts/layouts.module";
 import { PagesModule } from "./pages/pages.module";
 
 // Auth
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS  } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { initFirebaseBackend } from './authUtils';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
@@ -38,6 +38,7 @@ import { FileManagerEffects } from './store/File Manager/filemanager_effect';
 import { TodoEffects } from './store/Todo/todo_effect';
 import { ApplicationEffects } from './store/Jobs/jobs_effect';
 import { ApikeyEffects } from './store/APIKey/apikey_effect';
+import { provideToastr, ToastrModule } from 'ngx-toastr';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -86,12 +87,16 @@ if (environment.defaultauth === 'firebase') {
       FileManagerEffects,
       TodoEffects,
       ApplicationEffects,
-      ApikeyEffects]),
+      ApikeyEffects,
+    ]),
+    ToastrModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
+    provideAnimations(), // required animations providers
+    provideToastr()
   ],
   bootstrap: [AppComponent]
 })

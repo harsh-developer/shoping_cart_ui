@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "corporate": {
+    "shopping_cart_ui": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/corporate",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -117,10 +117,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "corporate:build:production"
+              "buildTarget": "shopping_cart_ui:build:production"
             },
             "development": {
-              "buildTarget": "corporate:build:development"
+              "buildTarget": "shopping_cart_ui:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -128,7 +128,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "corporate:build"
+            "buildTarget": "shopping_cart_ui:build"
           }
         },
         "test": {

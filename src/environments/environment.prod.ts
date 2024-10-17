@@ -1,3 +1,5 @@
+import { DEFAULT_CONFIG } from '../config/default';
+
 export const environment = {
   production: true,
   defaultauth: 'fackbackend',
@@ -10,5 +12,6 @@ export const environment = {
     messagingSenderId: '',
     appId: '',
     measurementId: ''
-  }
+  },
+  api_url: DEFAULT_CONFIG.api_url,
 };
